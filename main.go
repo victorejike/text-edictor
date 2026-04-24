@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"go/token"
 	"os"
 	"strconv"
 	"strings"
@@ -39,7 +38,7 @@ func main(){
 	fmt.Println("Your Program just ran sucssfully")
 
 
-	func Capitalize(text string) string {
+	func Capitalize(text  string)string {
 		result := strings.ToUpper(text[0:1]) + strings.ToLower(text[1:])
 		return result
 	}
@@ -71,13 +70,13 @@ func main(){
 			num, _ := strconv.ParseInt(val, 16, 64)
 			result[len(result)-1] = strconv.FormatInt(num, 10)
 			continue
-
 		   }
 
 		   if token == "(bin)" && len(result) > 0 {
 			val := result[len(result)-1]
-			num , _ := strconv.ParseInt(val, 2, 64)
-			result[len(result)-1] = strconv.FormatInt(num, 10)
+			num, _ := strconv.ParseInt(val, 2, 64)
+			result[len(result)-1] = strconv.FormatInt(num, 2, 64)
+			continue
 		   }
 
 
