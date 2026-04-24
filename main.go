@@ -66,12 +66,22 @@ func main(){
 				continue
 			}
 
-			if token == "(hex)" && len(result) > 0 {
-				val := result[len(result)-1]
-				num, _ := strconv.ParseInt(val, 16, 64)
-				result[len(result)] = strconv.FormatInt(num, 10)
-				continue
-			}
+		   if token == "(hex)" && len(result) > 0 {
+			val := result[len(result)-1]
+			num, _ := strconv.ParseInt(val, 16, 64)
+			result[len(result)-1] = strconv.FormatInt(num, 10)
+			continue
+
+		   }
+
+		   if token == "(bin)" && len(result) > 0 {
+			val := result[len(result)-1]
+			num , _ := strconv.ParseInt(val, 2, 64)
+			result[len(result)-1] = strconv.FormatInt(num, 10)
+		   }
+
+
+
 		 }
 	}
 }
