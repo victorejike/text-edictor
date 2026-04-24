@@ -1,10 +1,11 @@
 package main
 
-import(
+import (
 	"fmt"
+	"go/token"
 	"os"
+	"strconv"
 	"strings"
-
 )
 
 func main(){
@@ -39,11 +40,38 @@ func main(){
 
 
 	func Capitalize(text string) string {
-		result := strings.ToUpper(text) + strings.ToLower(text)
+		result := strings.ToUpper(text[0:1]) + strings.ToLower(text[1:])
 		return result
 	}
 
 	func transformer(text string)string  {
-		 
+		 token := strings.Fields(text)
+		 var result []string
+
+		 for i := 0; i < len(token); i++{
+			token := token[i]
+
+			if token == "(cap)" && len(result) > 0 {
+				result[len(result)-1] = Capitalize(result[len(result)-1])
+				continue
+			}
+
+			if token == "(up)" && len(result) > 0 {
+				result[len(result)-1] = strings.ToUpper(result[len(result)-1])
+				continue
+			}
+
+			if token == "(low)" && len(result) > 0 {
+				result[len(result)-1] = strings.ToLower(result[len(result)-1])
+				continue
+			}
+
+			if token == "(hex)" && len(result) > 0 {
+				val := result[len(result)-1]
+				num, _ := strconv.ParseInt(val, 16, 64)
+				result[len(result)] = strconv.FormatInt(num, 10)
+				continue
+			}
+		 }
 	}
 }
