@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func main(){
+func main() {
 	// is to create a program that checks for file
 	if len(os.Args) != 3 {
 		fmt.Println("usage: for you to use this go run main.go <inputfile> <outputfile>")
@@ -34,7 +34,6 @@ func main(){
 
 	text = transformer(text)
 
-
 	err = os.WriteFile(outputFile, []byte(data), 0644)
 	if err != nil {
 		fmt.Println("Error: cant write on this file check the file")
@@ -43,16 +42,16 @@ func main(){
 	fmt.Println("Your Program is completed!!")
 }
 
-func capitalized(text string)string{
+func capitalized(text string) string {
 	result := strings.ToUpper(text[0:1]) + strings.ToLower(text[1:])
 	return result
 }
 
-func transformer(text string)string{
+func transformer(text string) string {
 	token := strings.Fields(text)
 	var result []string
 
-	for i := 0; i < len(result); i++{
+	for i := 0; i < len(result); i++ {
 		token := token[i]
 
 		if token == "(cap)" && len(result) > 0 {
@@ -73,7 +72,7 @@ func transformer(text string)string{
 
 		if token == "(hex)" && len(result) > 0 {
 			val := result[len(result)-1]
-			num, _ := strconv.ParseInt(val,16, 64)
+			num, _ := strconv.ParseInt(val, 16, 64)
 			result[len(result)-1] = strconv.FormatInt(num, 10)
 			continue
 		}
@@ -85,14 +84,13 @@ func transformer(text string)string{
 			continue
 
 		}
+          
+		if token == "(cap," && i+1 < len(tokens){
+			numToken := strings.TrimSuffix(tokens[1+1], ")")
+			n, err := strconv.Atoi(numToken)
 
-
-		if token == "(cap," && i+1 < len(tokens) {
-			numtoken := strings.TrimSuffix(tokens[i+1], ")")
-			n, err := strconv.Atoi(numtoken)
-
-			if err == nil {
-				for i := 0;  i < n && i < len(result); i++{
+			if err == nil{
+				for i := 0; i < n && i < len(result); i++{
 					result[len(result)-1-i] = capitalized(result[len(result)-1-i])
 				}
 			}
@@ -100,8 +98,19 @@ func transformer(text string)string{
 			continue
 		}
 
+		if token == "(up," && i+1 < len(tokens) {
+	numToken := strings.TrimSuffix(tokens[i+1], ")")
+	n, err := strconv.Atoi(numToken)
 
-
-
+	if err == nil {
+		for j := 0; j < n && j < len(result); j++ {
+			result[len(result)-1-j] = strings.ToUpper(result[len(result)-1-j])
+		}
 	}
+
+	i++
+	continue
+}
+	}
+
 }
