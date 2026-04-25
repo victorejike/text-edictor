@@ -85,32 +85,47 @@ func transformer(text string) string {
 
 		}
           
-		if token == "(cap," && i+1 < len(tokens){
-			numToken := strings.TrimSuffix(tokens[1+1], ")")
-			n, err := strconv.Atoi(numToken)
+	 if token == "(cap," && i+1 < len(token){
+		numToken := strings.TrimSuffix(token[i+1], ")")
+		n, err := strconv.Atoi(numToken)
 
-			if err == nil{
-				for i := 0; i < n && i < len(result); i++{
-					result[len(result)-1-i] = capitalized(result[len(result)-1-i])
-				}
+		if err == nil{
+			for j := 0; j < n && j < len(result); j++{
+				result[len(result)-1-j] = capitalized(result[len(result)-1-j])
 			}
-			i++
-			continue
+		}
+		i++
+		continue
+	 }
+
+	 if token == "(up," && i+1 < len(token) {
+		numToken := strings.TrimSuffix(token[i+1], ")")
+		n, err := strconv.Atoi(numToken)
+
+		if err == nil {
+			for j := 0; j < n && j < len(result); j++ {
+				result[len(result)-1-j] = strings.ToUpper(result[len(result)-1-j])
+			}
 		}
 
-		if token == "(up," && i+1 < len(tokens) {
-	numToken := strings.TrimSuffix(tokens[i+1], ")")
-	n, err := strconv.Atoi(numToken)
+		i++
+		continue
+	 }
 
-	if err == nil {
-		for j := 0; j < n && j < len(result); j++ {
-			result[len(result)-1-j] = strings.ToUpper(result[len(result)-1-j])
+	 if token == "(low," && i+1 < len(result) {
+		numToken := strings.TrimSuffix(token[i+1], ")")
+		n, err := strconv.Atoi(numToken)
+         
+		if err == nil {
+		for j := 0; j < n && j < len(result); j++{
+			result[len(result)-1-i] = strings.ToLower(result[len(result)-1-i])
 		}
+	 }
+	 i++
+	 continue
 	}
 
-	i++
-	continue
-}
-	}
 
+	 
+    }
 }
