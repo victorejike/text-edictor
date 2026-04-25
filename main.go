@@ -55,6 +55,13 @@ func transformer(text string)string{
 	for i := 0; i < len(result); i++{
 		token := token[i]
 
-		if token == "(cap)" && 
+		if token == "(cap)" && len(result) > 0 {
+			result[len(result)-1] = capitalized(result[len(result)-1])
+			continue
+		}
+
+		if token == "(up)" && len(result) > 0 {
+			
+		}
 	}
 }
