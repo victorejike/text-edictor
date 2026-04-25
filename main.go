@@ -8,79 +8,53 @@ import (
 )
 
 func main(){
+	// is to create a program that checks for file
 	if len(os.Args) != 3 {
-		fmt.Println("usage: run main.go <inputFile> <outputFile>")
+		fmt.Println("usage: for you to use this go run main.go <inputfile> <outputfile>")
 		return
 	}
+
+	// now let me declear a variable for the inputfile and the outfile
 
 	inputFile := os.Args[1]
 	outputFile := os.Args[2]
 
+	// now let me deceler a variable for our progam that is the data and for the error handling
+	// using the os to read file to see what inside of our file
+
 	data, err := os.ReadFile(inputFile)
 	if err != nil {
-		fmt.Println("Error reading this file please try intputfile dear")
+		fmt.Println("Error Reading this file please input the correct file")
 		return
 	}
 
-	text := strings(data)
+	// now we have to create all our helper function that will handle all our changes
+
+	text := string(data)
 
 	text = transformer(text)
-	text = fixacticle(text)
-	test = fixpuncation(text)
-	test = fixquotes(text)
- 
-	err = os.WriteFile(outputFile,[]byte(data), 0644)
+
+
+	err = os.WriteFile(outputFile, []byte(data), 0644)
 	if err != nil {
-		fmt.Println("Error wrinting to file ")
+		fmt.Println("Error: cant write on this file check the file")
 		return
 	}
+	fmt.Println("Your Program is completed!!")
+}
 
-	fmt.Println("Your Program just ran sucssfully")
+func capitalized(text string)string{
+	result := strings.ToUpper(text[0:1]) + strings.ToLower(text[1:])
+	return result
+}
 
+func transformer(text string)string{
+	token := strings.Fields(text)
+	var result []string
 
-	func Capitalize(text  string)string {
-		result := strings.ToUpper(text[0:1]) + strings.ToLower(text[1:])
-		return result
-	}
+	for i := 0; i < len(result); i++{
+		token := token[i]
 
-	func transformer(text string)string  {
-		 token := strings.Fields(text)
-		 var result []string
-
-		 for i := 0; i < len(token); i++{
-			token := token[i]
-
-			if token == "(cap)" && len(result) > 0 {
-				result[len(result)-1] = Capitalize(result[len(result)-1])
-				continue
-			}
-
-			if token == "(up)" && len(result) > 0 {
-				result[len(result)-1] = strings.ToUpper(result[len(result)-1])
-				continue
-			}
-
-			if token == "(low)" && len(result) > 0 {
-				result[len(result)-1] = strings.ToLower(result[len(result)-1])
-				continue
-			}
-
-		   if token == "(hex)" && len(result) > 0 {
-			val := result[len(result)-1]
-			num, _ := strconv.ParseInt(val, 16, 64)
-			result[len(result)-1] = strconv.FormatInt(num, 10)
-			continue
-		   }
-
-		   if token == "(bin)" && len(result) > 0 {
-			val := result[len(result)-1]
-			num, _ := strconv.ParseInt(val, 2, 64)
-			result[len(result)-1] = strconv.FormatInt(num, 2, 64)
-			continue
-		   }
-
-
-
-		 }
+		if token == "(cap)" && 
 	}
 }
