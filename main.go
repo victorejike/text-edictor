@@ -86,6 +86,22 @@ func transformer(text string)string{
 
 		}
 
-		
+
+		if token == "(cap," && i+1 < len(tokens) {
+			numtoken := strings.TrimSuffix(tokens[i+1], ")")
+			n, err := strconv.Atoi(numtoken)
+
+			if err == nil {
+				for i := 0;  i < n && i < len(result); i++{
+					result[len(result)-1-i] = capitalized(result[len(result)-1-i])
+				}
+			}
+			i++
+			continue
+		}
+
+
+
+
 	}
 }
