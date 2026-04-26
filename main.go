@@ -96,5 +96,9 @@ func transforma(text string) string {
 			continue
 		}
 
+		if token == "(cap," && i+1 < len(result){
+			
+		}
+
 	}
 }
