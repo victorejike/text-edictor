@@ -17,10 +17,13 @@ import (
 	"fmt"
 )
 
-func MyFunction() {
-	fmt.Println("i just got executed!")
+func MyFunction(fname string) {
+	fmt.Println("hello,", fname, "welcomeback!")
 }
 
 func main() {
-	MyFunction()
+	MyFunction("john")
+	MyFunction("victor")
+	MyFunction("ejike")
+	MyFunction("nmesomma")
 }
