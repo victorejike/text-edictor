@@ -1,131 +1,61 @@
 package main
 
-import (
+import(
 	"fmt"
 	"os"
-	"strconv"
 	"strings"
+	"strconv"
 )
+//the file handler the program that open the file and read the file
 
-func main() {
-	// is to create a program that checks for file
-	if len(os.Args) != 3 {
-		fmt.Println("usage: for you to use this go run main.go <inputfile> <outputfile>")
-		return
-	}
+func main(){
+	// using the os to pass the argument that if this not equal to 3
+  if len(os.Args) != 3 {
+	fmt.Println("usage: go run main.go <inputfile> <outputfile>")
+	return
+  }
 
-	// now let me declear a variable for the inputfile and the outfile
+  // declering a variable that will store the input and output 
 
-	inputFile := os.Args[1]
-	outputFile := os.Args[2]
+  inputFile := os.Args[1]
+  outputFile := os.Args[2]
 
-	// now let me deceler a variable for our progam that is the data and for the error handling
-	// using the os to read file to see what inside of our file
+  // declera a variable  that will use to store our byte
+  //and can handle error 
 
-	data, err := os.ReadFile(inputFile)
-	if err != nil {
-		fmt.Println("Error Reading this file please input the correct file")
-		return
-	}
+  data, err := os.ReadFile(inputFile)
+  if err != nil {
+	fmt.Println("Error: Can't read this file please input the correct file")
+	return
+  }
 
-	// now we have to create all our helper function that will handle all our changes
+  // let's  declera a variable for the helper functions where they will be called
 
-	text := string(data)
+  text := string(data)
 
-	text = transformer(text)
+  text = transforma(text)
 
-	err = os.WriteFile(outputFile, []byte(data), 0644)
-	if err != nil {
-		fmt.Println("Error: cant write on this file check the file")
-		return
-	}
-	fmt.Println("Your Program is completed!!")
+  // now let us make it  to able to write on file which i will use the command to 0644 to givr permission to write on file
+   
+  err = os.WriteFile(outputFile, []byte(data), 0644)
+  if err != nil {
+	fmt.Println("Error can't write on this file!!!!!!!!!")
+    return
+  }
+
+  // this is for if the program ran succesful that should be the massage
+  fmt.Println("your progamm has run succesfuly")
+
 }
 
-func capitalized(text string) string {
+func Capitalized(text string)string{
 	result := strings.ToUpper(text[0:1]) + strings.ToLower(text[1:])
-	return result
+	return  result
 }
 
-func transformer(text string) string {
+func transforma(text string)string{
 	token := strings.Fields(text)
 	var result []string
 
-	for i := 0; i < len(result); i++ {
-		token := token[i]
-
-		if token == "(cap)" && len(result) > 0 {
-			result[len(result)-1] = capitalized(result[len(result)-1])
-			continue
-		}
-
-		if token == "(up)" && len(result) > 0 {
-			result[len(result)-1] = strings.ToUpper(result[len(result)-1])
-			continue
-
-		}
-
-		if token == "(low)" && len(result) > 0 {
-			result[len(result)-1] = strings.ToLower(result[len(result)-1])
-			continue
-		}
-
-		if token == "(hex)" && len(result) > 0 {
-			val := result[len(result)-1]
-			num, _ := strconv.ParseInt(val, 16, 64)
-			result[len(result)-1] = strconv.FormatInt(num, 10)
-			continue
-		}
-
-		if token == "(bin)" && len(result) > 0 {
-			val := result[len(result)-1]
-			num, _ := strconv.ParseInt(val, 2, 64)
-			result[len(result)] = strconv.FormatInt(num, 10)
-			continue
-
-		}
-          
-	 if token == "(cap," && i+1 < len(token){
-		numToken := strings.TrimSuffix(token[i+1], ")")
-		n, err := strconv.Atoi(numToken)
-
-		if err == nil{
-			for j := 0; j < n && j < len(result); j++{
-				result[len(result)-1-j] = capitalized(result[len(result)-1-j])
-			}
-		}
-		i++
-		continue
-	 }
-
-	 if token == "(up," && i+1 < len(token) {
-		numToken := strings.TrimSuffix(token[i+1], ")")
-		n, err := strconv.Atoi(numToken)
-
-		if err == nil {
-			for j := 0; j < n && j < len(result); j++ {
-				result[len(result)-1-j] = strings.ToUpper(result[len(result)-1-j])
-			}
-		}
-
-		i++
-		continue
-	 }
-
-	 if token == "(low," && i+1 < len(result) {
-		numToken := strings.TrimSuffix(token[i+1], ")")
-		n, err := strconv.Atoi(numToken)
-         
-		if err == nil {
-		for j := 0; j < n && j < len(result); j++{
-			result[len(result)-1-i] = strings.ToLower(result[len(result)-1-i])
-		}
-	 }
-	 i++
-	 continue
-	}
-
-
-	 
-    }
+	for i 
 }
