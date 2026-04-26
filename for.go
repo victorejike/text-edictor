@@ -17,13 +17,13 @@ import (
 	"fmt"
 )
 
-func MyFunction(fname string) {
-	fmt.Println("hello,", fname, "welcomeback!")
+func MyFunction(fname string, age int) {
+	fmt.Println("hello,", fname, "welcomeback!", "and do you know your ", age)
 }
 
 func main() {
-	MyFunction("john")
-	MyFunction("victor")
-	MyFunction("ejike")
-	MyFunction("nmesomma")
+	MyFunction("john", 18)
+	MyFunction("victor", 20)
+	MyFunction("ejike", 23)
+	MyFunction("nmesomma", 12)
 }
